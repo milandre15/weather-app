@@ -1,0 +1,61 @@
+@import "../../assets/scss/variables.scss";
+.today_main {
+  width: 100%;
+  border-radius: 20px;
+  padding: 10px 15px;
+  background: rgb(33, 35, 79);
+  background: linear-gradient(
+    150deg,
+    rgba(33, 35, 79, 1) 0%,
+    rgba(40, 42, 83, 1) 52%,
+    rgba(50, 52, 88, 1) 100%
+  );
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .day {
+      font-size: 22px;
+    }
+    .date {
+      font-size: 12px;
+    }
+  }
+  .body {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .temp {
+      display: flex;
+      line-height: 1;
+      .number {
+        line-height: 0.7;
+        font-size: 60px;
+        margin-right: 10px;
+      }
+      .badge {
+        font-size: 22px;
+        font-weight: bold;
+        color: #e3bc3c;
+      }
+    }
+    .weather_icon {
+      width: 100px;
+    }
+  }
+}
+@media (min-width: 1200px) and (max-width: 1599.98) {
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+}
+
+@media (max-width: 575.98px) {
+}
