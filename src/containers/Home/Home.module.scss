@@ -1,0 +1,77 @@
+@import "../../assets/scss/variables.scss";
+.day_options {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 5px;
+  .option {
+    font-size: 14px;
+    margin-right: 40px;
+    &.active {
+      color: #e3bc3c;
+    }
+  }
+}
+.hourly_holder {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: scroll;
+}
+.hourly {
+  flex: none;
+  max-width: 100%;
+  margin-right: 10px;
+  border-radius: 20px;
+  padding: 5px 8px 18px 15px;
+  background: rgb(33, 35, 79);
+  background: linear-gradient(
+    150deg,
+    rgba(33, 35, 79, 1) 0%,
+    rgba(40, 42, 83, 1) 52%,
+    rgba(50, 52, 88, 1) 100%
+  );
+  width: 85px;
+  .image_holder {
+    display: flex;
+    justify-content: flex-end;
+    .image {
+      width: 35px;
+    }
+  }
+  .time {
+    font-size: 9px;
+    margin: 5px 0;
+    opacity: 0.7;
+    margin-bottom: 7px;
+  }
+  .temp {
+    display: flex;
+    line-height: 1;
+
+    .number {
+      line-height: 0.7;
+      font-size: 16px;
+      margin-right: 3px;
+    }
+    .badge {
+      font-size: 12px;
+      font-weight: bold;
+      color: #e3bc3c;
+    }
+  }
+}
+@media (min-width: 1200px) and (max-width: 1599.98) {
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+}
+
+@media (max-width: 575.98px) {
+}

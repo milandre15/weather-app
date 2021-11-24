@@ -1,0 +1,41 @@
+@import "../../assets/scss/variables.scss";
+.header {
+  padding: 20px 0;
+}
+.layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .box {
+    display: flex;
+    align-items: center;
+    .icon {
+      width: 19px;
+      height: 19px;
+    }
+    .pin_icon {
+      width: 14px;
+      height: 14px;
+      margin-right: 5px;
+    }
+    .place_name {
+      display: block;
+      text-align: center;
+      font-size: 20px;
+    }
+  }
+}
+@media (min-width: 1200px) and (max-width: 1599.98) {
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+}
+
+@media (max-width: 575.98px) {
+}
