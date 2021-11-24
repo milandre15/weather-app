@@ -1,4 +1,4 @@
-import Header from "../src/components/header/Header";
+import Header from "../src/components/Header/Header";
 import Home from "./containers/Home/Home";
 
 function App() {

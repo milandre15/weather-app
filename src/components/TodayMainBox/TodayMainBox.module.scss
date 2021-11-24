@@ -19,6 +19,11 @@
     }
     .date {
       font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      .hours {
+        font-size: 22px;
+      }
     }
   }
   .body {

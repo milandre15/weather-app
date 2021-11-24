@@ -3,16 +3,20 @@ import TodayMainBox from "../../components/TodayMainBox/TodayMainBox";
 
 import styles from "./Home.module.scss";
 import we from "../../assets/svg/weather/clear-day.svg";
-import we2 from "../../assets/svg/weather/partly-cloudy-night-sleet.svg";
+import we2 from "../../assets/svg/weather/partly-cloudy-night.svg";
+import useForecast from "../../services/useForecast";
+import LoadingOverlay from "../../components/LoadingOverlay/LoadingOverlay";
 
 // console.log(process.env.API_KEY);
 
-export default function Home({ data }) {
-  console.log(data);
-
+export default function Home() {
+  const forecast = useForecast();
+  console.log(forecast);
+  const currentData = forecast && forecast.forecastData.current;
   return (
     <div className="container">
-      <TodayMainBox />
+      {!forecast.loaded && <LoadingOverlay />}
+      <TodayMainBox current={currentData} />
       <div className={styles.day_options}>
         <span className={`${styles.option} ${styles.active}`}>Today</span>
         <span className={styles.option}>Tomorrow</span>

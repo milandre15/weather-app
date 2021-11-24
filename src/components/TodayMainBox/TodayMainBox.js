@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./TodayMainBox.module.scss";
 import we from "../../assets/svg/weather/clear-day.svg";
 
-const TodayMainBox = () => {
+const TodayMainBox = ({ current }) => {
   const dateObj = new Date();
   const getDayNum = dateObj.getDay();
   const getMonthNum = dateObj.getMonth();
@@ -71,17 +71,29 @@ const TodayMainBox = () => {
       month = "December";
       break;
   }
+  console.log(current);
+  const temp = Math.round(current.temp);
+  const today = new Date(current.dt * 1000);
+  const hours = today.getHours();
+  const minutes =
+    today.getMinutes() < 10 ? `0${today.getMinutes()}` : today.getMinutes();
+  console.log(minutes);
   return (
     <div className={styles.today_main}>
       <div className={styles.header}>
         <span className={styles.day}>Today</span>
         <span className={styles.date}>
-          {day}, {date} {month}
+          <span className={styles.hours}>
+            {hours}:{minutes}
+          </span>
+          <span>
+            {day}, {date} {month}
+          </span>
         </span>
       </div>
       <div className={styles.body}>
         <div className={styles.temp}>
-          <div className={styles.number}>30</div>
+          <div className={styles.number}>{temp ? temp : "0"}</div>
           <div className={styles.badge}>&deg; C</div>
         </div>
         <img src={we} alt="weather" className={styles.weather_icon} />

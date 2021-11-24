@@ -1,41 +1,36 @@
 import React, { useState, useEffect } from "react";
 const axios = require("axios");
 
-const useLocation = () => {
-  const [location, setLocation] = useState({
+const useForecast = () => {
+  const [forecast, setForecast] = useState({
     city: "",
-    coordinates: {
-      lat: "",
-      lon: "",
-    },
+    forecastData: {},
     loaded: false,
   });
-
+  let city = "";
   const onSuccess = (location) => {
     axios
       .get(
         `https://eu1.locationiq.com/v1/reverse.php?key=${process.env.REACT_APP_GEOCODING_ACCES_TOKEN}&lat=${location.coords.latitude}&lon=${location.coords.longitude}&normalizecity=1&format=json`
       )
-      .then(function (response) {
-        let city = response.data.address.city;
-        setLocation({
+      .then((response) => {
+        city = response.data.address.city;
+        return axios.get(
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${response.data.lat}&lon=${response.data.lon}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+        );
+      })
+      .then((response) => {
+        setForecast({
           city: city,
-          coordinates: {
-            lat: location.coords.latitude,
-            lon: location.coords.longitude,
-          },
+          forecastData: response.data,
           loaded: true,
         });
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .then(function () {});
+      });
   };
   const onError = (error) => {
-    setLocation({
-      loaded: true,
+    setForecast({
       error,
+      loaded: true,
     });
   };
   useEffect(() => {
@@ -47,8 +42,11 @@ const useLocation = () => {
     }
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
   }, []);
-
-  return location;
+  if (forecast.loaded === true) {
+    return forecast;
+  } else {
+    return false;
+  }
 };
 
-export default useLocation;
+export default useForecast;

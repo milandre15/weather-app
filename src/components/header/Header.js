@@ -2,9 +2,9 @@ import styles from "./Header.module.scss";
 import { Plus } from "react-feather";
 import { Sliders } from "react-feather";
 import { MapPin } from "react-feather";
-import useLocation from "../../services/useLocation";
+import useForecast from "../../services/useForecast";
 const Header = () => {
-  const location = useLocation();
+  const location = useForecast();
   return (
     <header className={styles.header}>
       <div className="container">
@@ -14,7 +14,9 @@ const Header = () => {
           </div>
           <div className={styles.box}>
             <MapPin className={styles.pin_icon} />
-            <span className={styles.place_name}>{location.city}</span>
+            <span className={styles.place_name}>
+              {location.loaded ? location.city : "Loading..."}
+            </span>
           </div>
           <div className={styles.box}>
             <Sliders className={styles.icon} />
