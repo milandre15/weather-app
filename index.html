@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body >
+    <div class="app_wraper" id="appWraper">
+      <div class="filter" id="filter"></div>
+      <div class="loading" id="loader">
+        <div class="loader"></div>
+      </div>
+      <div class="first_window">
+      <header class="header">
+        <div class="container">
+          <div class="place_info_holder">
+            <div class="place">
+              <span class="material-icons place_icon" >
+                place
+                </span>
+              <span class="city" id="placeName"></span>
+              <div class="search_icon_holder" id="searchButton">
+                <span class="material-icons-outlined s_icon">
+                  search
+                </span>
+              </div>
+            </div>
+            <div class="date_time_holder">
+              <span class="date" id="curDate"></span>
+              <span class="time" id="curTime"></span>
+            </div>
+          </div>
+         
+        </div>
+        <input id="placeSearchField" type="text" placeholder="Enter a place" class="place_search_field">
+       
+      </header>
+      <div class="current_weather_holder">
+        <div class="cw_icon_holder">
+          <img src="" alt="icon" class="cw_icon" id="cwIcon">
+          <span class="cw_text" id="cwDescription"></span>
+        </div>
+        <div class="cw_temp_holder">
+          <div class="cw_temp" id="currentTemp"> </div>
+          <div class="cw_aditional">
+            <span class="cw_wind">
+              <span class="material-icons-outlined adit_icon">
+                air
+                </span>
+               <span id="cwWind"> </span>m/s
+            </span>
+            <span class="cw_hum">
+              <span class="material-icons-outlined adit_icon">
+                water_drop
+                </span>
+                <span id="cwHum"></span>%
+            </span>
+          </div>
+        </div>
+        <span class="dw_button" id="dwButton">8-day forecast</span>
+      </div>
+      <div class="hourly_weather_holder" id="hwWraper">  
+      </div>
+      <div class="bottom_arrow">
+        <span class="material-icons-outlined b_icon" id="scrollToButton">
+          expand_more
+          </span>
+      </div>
+      </div>  
+      <div class="options_buttons_holder">
+        <span class="options_buttons alerts" id="alButton">
+          <span class="material-icons-outlined icon">
+          warning
+          </span> 
+          Alerts
+        </span>
+        <span class="options_buttons aq" id="aqButton">
+          <span class="material-icons-outlined icon">
+          waves
+          </span> 
+          Air Quality
+        </span>
+      </div>
+      <div class="aditional_weather_info">
+        <div class="container">
+          <div class="adi_info">
+            <div class="sun_info">
+              <span class="sun_time">Sunrise <span id="awSunrise"></span> <img src="./assets/icons/sunrise.png" alt="icon" class="sun_icon" /></span>
+              <span class="sun_time">Sunset <span id="awSunset"></span> <img src="./assets/icons/sunset.png" alt="icon" class="sun_icon" /></span>
+            </div>
+            <div class="more_info">
+              <div class="aw_box">
+               <span class="static"> Real feel</span>
+                <span class="dinamic" id="awFeel"></span>
+              </div>
+              <div class="aw_box">
+                <span class="static">
+                Humidity
+              </span>
+                <span class="dinamic" id="awHum"></span>
+              </div>
+              <div class="aw_box">
+                <span class="static">
+                Visibility
+              </span>
+                <span class="dinamic" id="awVisibility"></span>
+              </div>
+              <div class="aw_box">
+                <span class="static">
+                Pressure
+              </span>
+                <span class="dinamic" id="awPressure"> </span>
+              </div>
+              <div class="aw_box">
+                <span class="static">
+                Wind speed
+              </span>
+                <span class="dinamic" id="awWind"></span>
+              </div>
+              <div class="aw_box">
+                <span class="static">
+                UV index
+              </span>
+                <span class="dinamic" id="awUV"> </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="quote_btn_holder">
+        <span class="quote_button" id="quoteButton">
+          <span class="material-icons-outlined quote_icon">
+          tips_and_updates
+          </span>
+          Quote of The Day</span>
+      </div>
+      <!--daily forecast -->
+      <div class="dw_holder" id="dwHolder">
+        <div class="dw_header">
+            <span class="material-icons-outlined back_icon" id="dwClose">
+              straight
+            </span>
+            <span class="dw_city" id="dwPlaceName"></span>
+        </div>
+        <div class="dw_body">
+          <div class="container">
+            <h3 class="title">8-day forecast</h3>
+            <div id="daily_wraper"></div>
+          </div>
+        </div>
+      </div>
+      <!--daily forecast end -->
+      <!-- alerts section -->
+      <div class="al_holder" id="alHolder">
+        <div class="al_header">
+          <span class="material-icons-outlined back_icon" id="alClose">
+            straight
+          </span>
+          <span class="al_city" id="alPlaceName"></span>
+        </div>
+        <div class="al_body">
+          <div class="container">
+            <h3 class="title">Alerts</h3>
+            <div id="alerts_wraper">
+            
+            </div>
+            <h4 class="sub_title">Hazard level</h4>
+            <div class="legends">
+              <ul class="list">
+                <li class="items">
+                  <span class="color"></span>
+                  <span class="text">Minimal</span>
+                </li>
+                <li class="items">
+                  <span class="color"></span>
+                  <span class="text">Medium</span>
+                </li>
+                <li class="items">
+                  <span class="color"></span>
+                  <span class="text">Significant</span>
+                </li>
+                <li class="items">
+                  <span class="color"></span>
+                  <span class="text">Very Significant</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- alerts section end -->
+      <!-- alerts section -->
+      <div class="aq_holder" id="aqHolder">
+        <div class="aq_header">
+          <span class="material-icons-outlined back_icon" id="aqClose">
+            straight
+          </span>
+        </div>
+        <div class="aq_body">
+              <div class="container">
+                <h3 class="title">Air Quality Index</h3>
+                <span class="aq_city">
+                  <span id="aqPlaceName"></span> Published at <span id="aqTime"></span>
+                </span>
+                <div id="aq_wraper">
+            
+                
+                </div>
+              </div>
+        </div>
+      </div>
+      <!-- alerts section end -->
+      <!-- quote modal -->
+      <div class="quote_modal" id="quoteModal">
+        <span class="material-icons-round close_icon" id="closeButton">
+          cancel
+        </span>
+        <span class="quote" id="quote"></span>
+        <span class="author" id="author"></span>
+      </div>
+      <!-- quote modal end -->
+    </div>
+  
+    <script src="utils.js"></script>
+    <script src="dateAndTime.js"></script>
+    <script src="quote.js"></script>
+    <script src="placesearch.js"></script>
+    <script src="index.js"></script>
+    <script 
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaNmjYtS97cduXdcQO3tqtqvZ5cKJKimY&libraries=places&callback=initAutocomplate" async defer>
+    </script>
+  </body>
+</html>
