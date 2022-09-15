@@ -13,9 +13,9 @@ let quote = {};
 
 const getQuotes = async () => {
   let q = {};
-  const url =
-    "https://cors-anywhere.herokuapp.com/https://zenquotes.io/api/today";
-
+  // const url =
+  //   "https://cors-anywhere.herokuapp.com/https://zenquotes.io/api/today";
+  const url = "https://zenquotes.io/api/today";
   try {
     await axios.get(url).then(({ data }) => {
       // q = pickQuote(data);

@@ -28,7 +28,7 @@ const getWeather = async (lat, lon) => {
         };
 
         return axios.get(
-          `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${weatherApiKey}`
+          `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${weatherApiKey}`
         );
       })
       .then((res) => {
@@ -50,7 +50,7 @@ const getAirQuality = async (lat, lon) => {
   try {
     await axios
       .get(
-        `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${weatherApiKey}`
+        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${weatherApiKey}`
       )
       .then(({ data }) => {
         aqData = data;
