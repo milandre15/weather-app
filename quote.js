@@ -1,26 +1,34 @@
 let quote = {};
 
-// const pickQuote = (data) => {
-//   const intQuoteCount = data.length - 1; // The number of quotes in array
-//   const dtNow = new Date();
-//   const intTZOffset = dtNow.getTimezoneOffset() * 60000; // automatically adjust for user timezone
-//   const intNow = dtNow.getTime() - intTZOffset;
-//   const intDay = Math.floor(intNow / 86400000); // The number of 'local' days since Jan 1, 1970
-//   const intQuoteToDisplay = intDay % intQuoteCount;
-//   const quoteOfTheDay = data[intQuoteToDisplay];
-//   return quoteOfTheDay;
-// };
-
+const pickQuote = (data) => {
+  const intQuoteCount = data.results.length; // The number of quotes in array
+  const dtNow = new Date();
+  const intTZOffset = dtNow.getTimezoneOffset() * 60000; // automatically adjust for user timezone
+  const intNow = dtNow.getTime() - intTZOffset;
+  const intDay = Math.floor(intNow / 86400000); // The number of 'local' days since Jan 1, 1970
+  const intQuoteToDisplay = intDay % intQuoteCount;
+  const quoteOfTheDay = data.results[intQuoteToDisplay];
+  return quoteOfTheDay;
+};
 const getQuotes = async () => {
   let q = {};
-  // const url =
-  //   "https://cors-anywhere.herokuapp.com/https://zenquotes.io/api/today";
-  const url = "https://zenquotes.io/api/today";
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  };
   try {
-    await axios.get(url).then(({ data }) => {
-      // q = pickQuote(data);
-      q = data[0];
-    });
+    await axios
+      .get(`https://api.quotable.io/quotes?limit=150`, headers)
+      .then(({ data }) => {
+        let fixedNumber = getFixedNumber(data.totalPages);
+        return axios.get(
+          `https://api.quotable.io/quotes?limit=150&page=${fixedNumber}`,
+          headers
+        );
+      })
+      .then(({ data }) => {
+        q = pickQuote(data);
+      });
   } catch (error) {
     console.error("ERROR!", error);
   }
@@ -28,7 +36,7 @@ const getQuotes = async () => {
 };
 
 const openQuoteModal = async () => {
-  if (quote.q != undefined) {
+  if (quote.content != undefined) {
     quote = quote;
   } else {
     quote = await getQuotes();
@@ -39,8 +47,8 @@ const openQuoteModal = async () => {
   const quoteEl = document.querySelector("#quote");
   const authorEl = document.querySelector("#author");
 
-  quoteEl.innerText = `"${quote.q}"`;
-  authorEl.innerText = `- ${quote.a}`;
+  quoteEl.innerText = `"${quote.content}"`;
+  authorEl.innerText = `- ${quote.author}`;
   filter.style.width = "100%";
   modal.style.top = "40px";
   document.body.style.overflow = "hidden";

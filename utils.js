@@ -288,3 +288,12 @@ const getTime = (data, offset) => {
   second = checkTime(second);
   return { locationDate, hour, minute, second };
 };
+const getFixedNumber = (range) => {
+  const rangeOfNumbers = range;
+  const dtNow = new Date();
+  const intTZOffset = dtNow.getTimezoneOffset() * 60000; // automatically adjust for user timezone
+  const intNow = dtNow.getTime() - intTZOffset;
+  const intDay = Math.floor(intNow / 86400000); // The number of 'local' days since Jan 1, 1970
+  const fixedNumber = intDay % rangeOfNumbers;
+  return fixedNumber;
+};
