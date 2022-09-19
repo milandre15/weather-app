@@ -215,7 +215,7 @@ body{
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  padding: 20px 0 20px 15px;
+  padding: 8px 0 8px 15px;
   width: 100%;
 }
 .hourly_weather_holder::-webkit-scrollbar {    
@@ -243,7 +243,7 @@ body{
 margin-bottom: 10px;
 }
 .hourly_weather_holder .hw_box .hw_icon_holder .hw_icon{
-  width: 20px;
+  width: 28px;
 }
 .hourly_weather_holder .hw_box .hw_temp{
   font-size: 16px;
@@ -259,7 +259,6 @@ margin-bottom: 10px;
 .bottom_arrow{
   text-align: center;
   height: 27px;
-  margin-top: 10px;
 }
 .bottom_arrow .b_icon{
   font-size: 40px;
