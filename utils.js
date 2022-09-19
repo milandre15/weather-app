@@ -172,13 +172,6 @@ const getBackgroundName = (id) => {
   }
   return background;
 };
-// const parseTimes = (t) => {
-//   let th = new Date(t * 1000).getHours();
-//   let tm = new Date(t * 1000).getMinutes();
-//   tm = checkTime(tm);
-//   let total = parseInt(`${th}${tm}`);
-//   return total;
-// };
 const getIcon = (id, currentTime, sunrise, sunset) => {
   let iconsPath = "";
 

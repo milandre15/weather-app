@@ -34,7 +34,6 @@ const getQuotes = async () => {
   }
   return q;
 };
-
 const openQuoteModal = async () => {
   if (quote.content != undefined) {
     quote = quote;
@@ -53,7 +52,6 @@ const openQuoteModal = async () => {
   modal.style.top = "40px";
   document.body.style.overflow = "hidden";
 };
-
 const closeQuoteModal = () => {
   const modal = document.querySelector("#quoteModal");
   const filter = document.querySelector("#filter");
