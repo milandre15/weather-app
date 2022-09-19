@@ -36,9 +36,6 @@ const getWeather = async (lat, lon) => {
           ...allData,
           city: res.data[0].name,
         };
-
-        const loader = document.querySelector("#loader");
-        loader.style.display = "none";
       });
     return allData;
   } catch (error) {
@@ -64,7 +61,6 @@ const getAirQuality = async (lat, lon) => {
 
 // print data
 const printData = (data) => {
-  console.log(data);
   printPlaceName(data.city);
   printCurrentWeather(data.weather);
   printHourlyWeather(data.weather);
@@ -74,9 +70,13 @@ const printData = (data) => {
     printAlerts(data.weather.alerts);
   } else {
     const alertsWraper = document.querySelector("#alerts_wraper");
+    const hazardLevel = document.querySelector("#hazardLevel");
     alertsWraper.style.color = "#fff";
     alertsWraper.innerText = "There are no alerts at this time!";
+    hazardLevel.classList.add("hide");
   }
+  const loader = document.querySelector("#loader");
+  loader.style.display = "none";
 };
 const printPlaceName = (name) => {
   const placeName = document.querySelector("#placeName");
@@ -213,7 +213,7 @@ const printDailyForecast = (data) => {
     let maxTemp = Math.round(item.temp.max);
     let minTemp = Math.round(item.temp.min);
     let icon = getIconName(item.weather[0].id);
-
+    let fullIconPath = `./assets/icons/day/${icon}.png`;
     html.innerHTML = `
     <span class="day_name">${day} 
     <span class="date">${sDate}</span>
@@ -223,7 +223,7 @@ const printDailyForecast = (data) => {
       <span class="min">${minTemp}<sup>&deg;</sup></span>
     </span>
     <span class="day_icon_holder">
-      <img src="/assets/icons/day/${icon}.png" alt="icon" class="day_icon">
+      <img src="${fullIconPath}" alt="icon" class="day_icon">
     </span>
   `;
     wraper.appendChild(html);
@@ -245,6 +245,7 @@ const printAlerts = (data) => {
       dateOptions
     );
     const description = item.description;
+    const hazardLevel = document.querySelector("#hazardLevel");
     if (item.sender_name == "RHMS Serbia") {
       // added only for Serbia to show the danger level colors. Not a good practice in general
       const [title, alertClass] = item.event.split("-");
@@ -255,6 +256,7 @@ const printAlerts = (data) => {
       <span class="al_desc">${description}</span>
     `;
     } else {
+      hazardLevel.classList.add("hide");
       const title = item.event;
       html.classList.add("box", "yellow");
       html.innerHTML = `
